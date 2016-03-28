@@ -48,6 +48,9 @@ table {
     border-spacing: 0;
 }
 a {
+    line-height: 1;
+    color: rgba(216, 216, 216, 0.7);
+    font-family: sans-serif;
     text-decoration: none;
 }
 
@@ -55,121 +58,112 @@ a {
     -webkit-user-select: none; /* Chrome/Safari */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+ */
-
     /* Rules below not implemented in browsers yet */
     -o-user-select: none;
     user-select: none;
 }
 
-
 /* Header */
 
 header {
-    position: relative;
     width: 100%;
-    height: 20vw;
-}
-
-#video-bg {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -100;
-    overflow: hidden;
-}
-#video-bg #video {
-    position: absolute;
-    width: 100%;
-    height: 300%;
-    top: -100%;
-    left: 0;
-}
-
-nav {
-    padding-left: 2%;
-    padding-right: 2%;
-    width: 96%;
-    height: 20%;
-    background: rgba(89,89,89,0.68);
-    background: -moz-linear-gradient(top, rgba(89,89,89,0.68) 0%, rgba(0,0,0,0.85) 52%, rgba(89,89,89,0.99) 97%, rgba(89,89,89,1) 100%);
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(89,89,89,0.68)), color-stop(52%, rgba(0,0,0,0.85)), color-stop(97%, rgba(89,89,89,0.99)), color-stop(100%, rgba(89,89,89,1)));
-    background: -webkit-linear-gradient(top, rgba(89,89,89,0.68) 0%, rgba(0,0,0,0.85) 52%, rgba(89,89,89,0.99) 97%, rgba(89,89,89,1) 100%);
-    background: -o-linear-gradient(top, rgba(89,89,89,0.68) 0%, rgba(0,0,0,0.85) 52%, rgba(89,89,89,0.99) 97%, rgba(89,89,89,1) 100%);
-    background: -ms-linear-gradient(top, rgba(89,89,89,0.68) 0%, rgba(0,0,0,0.85) 52%, rgba(89,89,89,0.99) 97%, rgba(89,89,89,1) 100%);
-    background: linear-gradient(to bottom, rgba(89,89,89,0.68) 0%, rgba(0,0,0,0.85) 52%, rgba(89,89,89,0.99) 97%, rgba(89,89,89,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#595959', endColorstr='#595959', GradientType=0 );
+    background-color: black;
+    padding: 0 20%;
+    height: auto;
+    float: left;
+    border-bottom: rgba(216, 216, 216, 0.8) 0.2vw solid;
 }
 
 .logo-link {
-    height: 100%;
-    width: 28%;
+    float: left;
+    padding-left: 1%;
+    width: 18%;
+}
+
+.logo-link img{
+    margin-top: 2%;
+    height: 2.6vw;
+}
+
+nav {
+    width: 30%;
     float: left;
 }
 
-.logo-link a {
-    display: block;
+.nav-btn{
     float: left;
-    height: 100%;
-}
-
-.logo-link img {
-    margin-top: 5%;
-    height: 85% ;
-}
-
-.logo-link p {
+    padding: 3.3% 2%;
+    cursor: pointer;
     font-size: 1.2vw;
-    margin-top: 22%;
-    color: rgba(194, 194, 194, 0.58);
-    font-family: 'Gloria Hallelujah', cursive;
 }
 
-#nav-menu {
-    width: 68%;
+.nav-btn:hover {
+    color: red;
+}
+
+.toolbox {
+    position: relative;
+    padding-left: 3%;
+    width: 7%;
     float: left;
-    height: 100%;
 }
 
-#nav-menu div {
-    float: right;
-    text-align: center;
-    font-size: 1.2vw;
-    padding: 2.1%;
-    margin-right: 0.3%;
+.tool-btn{
+    float: left;
+    margin: 0 5%;
     cursor: pointer;
 }
 
-#nav-menu div:hover {
-    outline: black solid 1px;
-    background: rgba(89,89,89,0.68);
-    background: -moz-linear-gradient(top, rgba(89,89,89,0.68) 0%, rgba(0,0,0,0.85) 52%, rgba(89,89,89,0.99) 97%, rgba(89,89,89,1) 100%);
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(89,89,89,0.68)), color-stop(52%, rgba(0,0,0,0.85)), color-stop(97%, rgba(89,89,89,0.99)), color-stop(100%, rgba(89,89,89,1)));
-    background: -webkit-linear-gradient(top, rgba(89,89,89,0.68) 0%, rgba(0,0,0,0.85) 52%, rgba(89,89,89,0.99) 97%, rgba(89,89,89,1) 100%);
-    background: -o-linear-gradient(top, rgba(89,89,89,0.68) 0%, rgba(0,0,0,0.85) 52%, rgba(89,89,89,0.99) 97%, rgba(89,89,89,1) 100%);
-    background: -ms-linear-gradient(top, rgba(89,89,89,0.68) 0%, rgba(0,0,0,0.85) 52%, rgba(89,89,89,0.99) 97%, rgba(89,89,89,1) 100%);
-    background: linear-gradient(to bottom, rgba(89,89,89,0.68) 0%, rgba(0,0,0,0.85) 52%, rgba(89,89,89,0.99) 97%, rgba(89,89,89,1) 100%);
+.tool-btn:hover {
+    color : red;
 }
 
-#main-header {
-    cursor: default ;
+.toolbox-icon {
+    margin: 30% 25% 0 25%;
+}
 
+.profile-pic-menu {
+    height: 2vw;
+    border-radius: 60%;
+    margin-top: 23%;
+}
+
+
+#profile-dropdown {
+    display: none;
     position: absolute;
-    top: 40%;
-    left: 23%;
-    font-family: 'Gloria Hallelujah', cursive;
-    font-size: 6vw;
-    border-radius: 50%;
-    color: rgba(200, 208, 215, 0.73);
-    background: rgba(0,0,0,1);
-    background: -moz-radial-gradient(center, ellipse cover, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 1%, rgba(66,66,66,0.95) 27%, rgba(128,128,128,0.91) 50%, rgba(194,194,194,0.86) 76%, rgba(255,255,255,0.81) 100%);
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(0,0,0,1)), color-stop(1%, rgba(0,0,0,1)), color-stop(27%, rgba(66,66,66,0.95)), color-stop(50%, rgba(128,128,128,0.91)), color-stop(76%, rgba(194,194,194,0.86)), color-stop(100%, rgba(255,255,255,0.81)));
-    background: -webkit-radial-gradient(center, ellipse cover, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 1%, rgba(66,66,66,0.95) 27%, rgba(128,128,128,0.91) 50%, rgba(194,194,194,0.86) 76%, rgba(255,255,255,0.81) 100%);
-    background: -o-radial-gradient(center, ellipse cover, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 1%, rgba(66,66,66,0.95) 27%, rgba(128,128,128,0.91) 50%, rgba(194,194,194,0.86) 76%, rgba(255,255,255,0.81) 100%);
-    background: -ms-radial-gradient(center, ellipse cover, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 1%, rgba(66,66,66,0.95) 27%, rgba(128,128,128,0.91) 50%, rgba(194,194,194,0.86) 76%, rgba(255,255,255,0.81) 100%);
-    background: radial-gradient(ellipse at center, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.82) 1%, rgba(44, 44, 44, 0.69) 27%, rgba(75, 75, 75, 0.53) 50%, rgba(118, 118, 118, 0) 76%, rgba(255,255,255,0.81) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff', GradientType=1 );
+    background-color: black;
+    top: 125%;
+    left: -10%;
+    width: 120%;
+    font-size: 0.8vw;
+    padding: 3% 0;
+    border-radius: 2%;
+}
+
+.info-links {
+    display: block;
+    padding: 3% 0 2% 15%;
+    cursor: pointer;
+    border-radius: 2%;
+}
+
+.info-links:hover {
+    background-color: rgba(216, 216, 216, 0.8);
+    color: #000000;
+}
+
+.separator {
+    width: 85%;
+    margin: 3% auto;
+    border-bottom: rgba(216, 216, 216, 0.8) 0.1vw solid;
+}
+
+.curr-selected {
+    height: 0.8vw;
+    position: absolute;
+    top: -9%;
+    left: 67%;
 }
 
 
@@ -201,6 +195,7 @@ section {
     height: 100%;
     background-color: rgba(46, 46, 46, 0.8);
     z-index: 1000;
+    display: none;
 }
 
 form {
@@ -276,6 +271,7 @@ input {
     border-radius: 0.25em;
     margin-bottom: 3%;
     float: left;
+    cursor: pointer;
 }
 
 .submit:hover {
@@ -293,6 +289,11 @@ input {
 
 /* login form */
 
+#login-form {
+    top: 20%;
+    display: none;
+}
+
 #forgotten-password {
     text-decoration: underline;
     cursor: pointer;
@@ -302,6 +303,11 @@ input {
 }
 
 /*sign in form */
+
+#sign-in-form {
+    top: 20%;
+    display: none;
+}
 
 .terms-and-policies-link {
     text-decoration: underline;
@@ -360,3 +366,7 @@ input {
     width: 22%;
 }
 
+.sign-in-form-error {
+    font-size: 0.8vw;
+    color: red;
+}

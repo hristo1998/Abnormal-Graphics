@@ -55,6 +55,7 @@
         {
 
             //$table = 'products';
+
             if(!isset($info[0]))
             {
                 $info = array(0=>$info);

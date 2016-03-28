@@ -52,26 +52,28 @@
 
         $user['password'] = md5($user['password']);
         unset($user['repeat_password']);
-        $day = $user['user-born_at_day'];
-        unset($user['user-born_at_day']);
-        $month = $user['user-born_at_month'];
-        unset($user['user-born_at_month']);
-        $year = $user['user-born_at_year'];
-        unset($user['user-born_at_year']);
+        $day = $user['user_born_at_day'];
+        unset($user['user_born_at_day']);
+        $month = $user['user_born_at_month'];
+        unset($user['user_born_at_month']);
+        $year = $user['user_born_at_year'];
+        unset($user['user_born_at_year']);
         $user['birthdate'] = $year.'-'.$month.'-'.$day;
 
         $id = $db->saveArray("users", $user);
 
+        $_SESSION['logged_user'] = true;
+        $_SESSION['username'] = $user['username'];
 
-//        $file = file_get_contents($_FILES['file']['tmp_name']);
-//        $tar = getcwd()."/pictures/picture_".$id.".jpg";
-//
-//        file_put_contents( $tar , $file );
 
+            //        $file = file_get_contents($_FILES['file']['tmp_name']);
+            //        $tar = getcwd()."/pictures/user_profile_pic_".$id.".jpg";
+            //
+            //        file_put_contents( $tar , $file );
 
     }
     else{
-
+        echo "error";
     }
 
 

@@ -4,55 +4,53 @@
 
 $(document).ready( function(){
 
-    $('#login-form').hide();
-    $('#sign-in-form').hide();
-    $('#darker-bg').hide();
-
     $('#login-button').click(function(){
         $('#darker-bg').show();
-        $('#login-form').css({top : '-40'});
         $('#login-form').show();
-        $('#login-form').animate({top:"30%"}, 400);
     });
 
     $('#sign-in-button').click(function(){
         $('#darker-bg').show();
-        $('#sign-in-form').css({top : '-50'});
         $('#sign-in-form').show();
-        $('#sign-in-form').animate({top:"30%"}, 400);
     });
 
     $('#darker-bg').click(function(){
         $('#darker-bg').hide();
-        $('#login-form').stop(true,true).css({top:"-40%"});
         $('#login-form').hide();
-        $('#sign-in-form').stop(true,true).css({top:"-50%"});
         $('#sign-in-form').hide();
     });
 
     $(window).keydown(function(event){
         if(event.keyCode == 27){
             $('#darker-bg').hide();
-            $('#login-form').stop(true,true).css({top:"-40%"});
             $('#login-form').hide();
-            $('#sign-in-form').stop(true,true).css({top:"-50%"});
             $('#sign-in-form').hide();
         }
     });
 
     $('.log-in-link').click(function(){
-        $('#sign-in-form').css({top:"-50%"});
         $('#sign-in-form').hide();
-        $('#login-form').css({top:"30%"});
         $('#login-form').show();
     });
 
     $('.sign-in-link').click(function(){
-        $('#login-form').css({top:"-40%"});
         $('#login-form').hide();
-        $('#sign-in-form').css({top:"30%"});
         $('#sign-in-form').show();
     });
+
+
+    //dropdown menu
+
+    $(document).on('click' , function(event){
+        if (!$(event.target).closest('.toolbox').length) {
+            $('#profile-dropdown').hide();
+        }
+    })
+
+    $('.profile-btn').click(function(){
+        $('#profile-dropdown').toggle();
+    });
+
 
     //side jokes
 
@@ -75,7 +73,8 @@ $(document).ready( function(){
     var lastNAmeErr = true;
     var activeElement;
 
-    $('.username').on("keyup", function(){
+
+    $('#sign-in-username').on("keyup", function(){
 
         activeElement = $(this);
         if(activeElement.val().length == 0 )
@@ -90,6 +89,7 @@ $(document).ready( function(){
                 type: "POST",
                 data: { username: activeElement.val()},
                 success: function(response) {
+
 
                     if( response == "Ok!"  )
                     {
@@ -129,7 +129,7 @@ $(document).ready( function(){
 
 
 
-    $('.password').on("keyup", function() {
+    $('#sign-in-password').on("keyup", function() {
 
         activeElement = $(this);
         var re = /^\w+$/;
@@ -185,7 +185,7 @@ $(document).ready( function(){
     });
 
 
-    $('.repeat_password').on("keyup", function(){
+    $('#repeat_password').on("keyup", function(){
 
         activeElement = $(this);
         rePassErr = true
@@ -200,7 +200,7 @@ $(document).ready( function(){
             {
                 activeElement.next().html(' <img src="../Pictures/no.png" alt="" class="validation_icon">');
             }
-            else if( activeElement.val() == $('.password').val())
+            else if( activeElement.val() == $('#sign-in-password').val())
             {
                 activeElement.next().html(' <img src="../Pictures/tick.png" alt="" class="validation_icon">');
                 rePassErr = false;
@@ -236,7 +236,7 @@ $(document).ready( function(){
 
     });
 
-    $('.firstName').on("keyup" , function(){
+    $('#firstName').on("keyup" , function(){
 
         activeElement = $(this);
         nameErr = true;
@@ -267,7 +267,7 @@ $(document).ready( function(){
 
     });
 
-    $('.lastName').on("keyup" , function(){
+    $('#lastName').on("keyup" , function(){
 
         activeElement = $(this);
         lastNAmeErr = true;
@@ -307,11 +307,74 @@ $(document).ready( function(){
             $('#sign-in-form .submit').prop('disabled', false);
             $('#sign-in-form .submit').css({cursor : "pointer"});
         }
+    },1000);
 
 
+    $('#submit-sign-in').click(function(event){
+
+        event.preventDefault();
+        var activeElement = $(this);
+
+        $.ajax({
+            url: "/php/signIn.php",
+            type: "POST",
+            data: { username: $('#sign-in-username').val() ,
+                    password: $('#sign-in-password').val() ,
+                    repeat_password: $('#repeat_password').val() ,
+                    email: $('#email').val() ,
+                    firstName: $('#firstName').val() ,
+                    lastName: $('#lastName').val() ,
+                    gender: $('#gender').val() ,
+                    user_born_at_day: $('#date_day').val() ,
+                    user_born_at_month: $('#date_month').val() ,
+                    user_born_at_year: $('#date_year').val()
+            },
+            success: function(response) {
+
+                if( response == 'error' ){
+                    $(activeElement).next().html('Sorry something went wrong! Please fill the form again');
+                }
+                else {
+
+                    $('#darker-bg').hide();
+                    $('#login-form').hide();
+                    $('#sign-in-form').hide();
+
+                }
+            }
+
+        });
+    });
 
 
+    $('#submit-log-in').click(function( event){
 
-    },1000)
+        event.preventDefault();
+
+        $.ajax({
+            url: "/php/login.php",
+            type: "POST",
+            data: { username: $('#login_username').val() ,
+                    password: $('#login_password').val()
+            },
+            success: function(response) {
+
+                alert(response);
+
+                if( response == 'error' ){
+                    $('.sign-in-form-error').html('Wrong username or password');
+                }
+                else {
+
+
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert(textStatus + " " + errorThrown);
+            }
+        });
+
+    });
+
 
 });
