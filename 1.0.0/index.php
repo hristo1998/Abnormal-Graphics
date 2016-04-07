@@ -17,9 +17,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">  <!-- Font Awesome -->
     <script src="http://code.jquery.com/jquery-1.12.0.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.js"></script>
-
-    <!--   <script src="js/jquery-1.9.0.min.js"></script>-->
-    <script src="js/main.js"></script>
+    <script src="js/jquery-1.9.0.min.js"></script>
+    <script src="js/LogInSignIn.js"></script>
     <link rel="stylesheet" href="css/main.css">
     <link rel="shortcut icon" href="Pictures/transparent-logo.ico">
 
@@ -47,80 +46,80 @@
 <header class="non-select" >
 
 
-    <a href="index.php" class="logo-link">
-        <img src="Pictures/transparent-logo-2.png" alt="" />
-    </a>
+    <div class="wrapper">
+
+        <a href="index.php" class="logo-link">
+            <img src="Pictures/transparent-logo-2.png" alt="" />
+        </a>
 
 
-    <nav>
-        <div class="nav-btn">
-            News
-        </div>
-        <div class="nav-btn">
-            Reviews
-        </div>
-        <div class="nav-btn">
-            Hardware
-        </div>
-    </nav>
+        <nav>
+            <div class="nav-btn">
+                News
+            </div>
+            <div class="nav-btn">
+                Reviews
+            </div>
+            <div class="nav-btn">
+                Hardware
+            </div>
+        </nav>
 
-    <div class="toolbox">
+        <div class="toolbox">
 
-        <div class="search-btn tool-btn">
-            <i class="fa fa-search toolbox-icon"></i>
-        </div>
-        <div class="profile-btn tool-btn">
+            <div class="profile-btn tool-btn">
 
+                <?php
+                if( $_SESSION['logged_user']  == true ){
 
+                    ?>
+                        <img src="Pictures/ProfilePictures/default-male-profile-pic.jpg.jpg" alt="" class="profile-pic-menu">
+                    <?php
 
-<!--            --><?php
-//                if( $_SESSION['logged_user']  == true ){
-//
-//                    ?>
-<!--                        <img src="Pictures/ProfilePictures/default-male-profile-pic.jpg.jpg" alt="" class="profile-pic-menu">-->
-<!--                    --><?php
-//
-//                }
-//                else{
-//                    ?>
-<!--                        -->
-<!--                    --><?php
-//                }
-//            ?>
+                }
+                else
+                {
+                    ?>
+                        <i class="fa fa-chevron-down toolbox-icon"></i>
+                    <?php
+                }
+                ?>
 
-            <i class="fa fa-chevron-down toolbox-icon"></i>
+            </div>
 
-        </div>
+            <div id="profile-dropdown">
 
-        <div id="profile-dropdown">
+                <img src="Pictures/up-arrow-curr.png" alt="" class="curr-selected">
 
-           <img src="Pictures/up-arrow-curr.png" alt=""class="curr-selected">
+                <a href="" class="info-links">
+                    Contact us
+                </a>
+                <a href="" class="info-links">
+                    About us
+                </a>
+                <a href="" class="info-links">
+                    Terms and polices
+                </a>
 
-           <a href="" class="info-links">
-              Contact us
-           </a>
-           <a href="" class="info-links">
-              About us
-           </a>
-           <a href="" class="info-links">
-              Terms and polices
-           </a>
-
-           <div class="separator"></div>
+                <div class="separator"></div>
 
 
-           <div id="sign-in-button" class="info-links">
-               Sign in
-           </div>
-           <div id="login-button" class="info-links">
-               Log in
-           </div>
+                <div id="sign-in-button" class="info-links">
+                    Sign in
+                </div>
+                <div id="login-button" class="info-links">
+                    Log in
+                </div>
+
+            </div>
+
+            <div class="search-btn tool-btn">
+                <i class="fa fa-search toolbox-icon"></i>
+            </div>
 
 
-        </>
+
     </div>
-
-
 
 </header>
 

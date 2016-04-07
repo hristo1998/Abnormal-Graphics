@@ -85,11 +85,10 @@ $(document).ready( function(){
         else
         {
             $.ajax({
-                url: "/php/signInValidations.php",
+                url: "/php/UserSideSignInValidations.php",
                 type: "POST",
                 data: { username: activeElement.val()},
                 success: function(response) {
-
 
                     if( response == "Ok!"  )
                     {
@@ -336,9 +335,7 @@ $(document).ready( function(){
                 }
                 else {
 
-                    $('#darker-bg').hide();
-                    $('#login-form').hide();
-                    $('#sign-in-form').hide();
+                    loadUserContent(); // --------------------------- write function that load the logged user experience of the man page
 
                 }
             }
@@ -366,7 +363,8 @@ $(document).ready( function(){
                 }
                 else {
 
-
+                    loadUserContent(); // --------------------------- write function that load the logged user experience of the man page
+                    
                 }
             },
             error: function(jqXHR, textStatus, errorThrown){
@@ -376,5 +374,10 @@ $(document).ready( function(){
 
     });
 
+    
+
 
 });
+
+
+
