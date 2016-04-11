@@ -6,12 +6,15 @@
  * Time: 17:18
  */
 
+/*
+ * Server side checks
+ */
+
     require_once('dbClass.php');
+    require_once("Sessions.php");
 
     $user = $_POST;
     $hasError = false;
-
-
 
 
     foreach($user as $k=>$v)
@@ -23,7 +26,7 @@
     if(strlen($user['username'])<5)
     {
         $hasError = true;
-        echo "username";
+        //echo "username";
     }
 
     $query = "SELECT * FROM `users` WHERE `users`.`username` = '".$user['username']."'";
@@ -32,20 +35,20 @@
     if(count($result) > 0)
     {
         $hasError = true;
-        echo "taken";
+        //echo "taken";
     }
 
 
     if(strlen($user['password'])< 4)
     {
         $hasError = true;
-        echo "short pass";
+        //echo "short pass";
     }
 
     if($user['password'] != $user['repeat_password'])
     {
         $hasError = true;
-        echo "rep pass";
+        //echo "rep pass";
     }
 
     if(!$hasError){
@@ -59,11 +62,22 @@
         $year = $user['user_born_at_year'];
         unset($user['user_born_at_year']);
         $user['birthdate'] = $year.'-'.$month.'-'.$day;
+        $user['joindate'] = date("Y-m-d");
+
+        if($user['gender'] == 2){
+            $user['profilePicId'] = "default-female-profile-pic.jpg";
+        }
+        else
+        {
+            $user['profilePicId'] = "default-male-profile-pic.jpg";
+        }
 
         $id = $db->saveArray("users", $user);
 
-        $_SESSION['logged_user'] = true;
-        $_SESSION['username'] = $user['username'];
+        startSession($user['username'] , $user['email'] ,$user['firstName'] , $user['lastName'] , $user['gender'] , $user['birthdate'] , $user['joindate'] , $user['profilePicId'] );
+
+        echo "success";
+        exit;
 
 
             //        $file = file_get_contents($_FILES['file']['tmp_name']);
@@ -71,9 +85,13 @@
             //
             //        file_put_contents( $tar , $file );
 
+
     }
-    else{
+    else
+    {
         echo "error";
+        exit;
     }
+
 
 

@@ -4,65 +4,6 @@
 
 $(document).ready( function(){
 
-    $('#login-button').click(function(){
-        $('#darker-bg').show();
-        $('#login-form').show();
-    });
-
-    $('#sign-in-button').click(function(){
-        $('#darker-bg').show();
-        $('#sign-in-form').show();
-    });
-
-    $('#darker-bg').click(function(){
-        $('#darker-bg').hide();
-        $('#login-form').hide();
-        $('#sign-in-form').hide();
-    });
-
-    $(window).keydown(function(event){
-        if(event.keyCode == 27){
-            $('#darker-bg').hide();
-            $('#login-form').hide();
-            $('#sign-in-form').hide();
-        }
-    });
-
-    $('.log-in-link').click(function(){
-        $('#sign-in-form').hide();
-        $('#login-form').show();
-    });
-
-    $('.sign-in-link').click(function(){
-        $('#login-form').hide();
-        $('#sign-in-form').show();
-    });
-
-
-    //dropdown menu
-
-    $(document).on('click' , function(event){
-        if (!$(event.target).closest('.toolbox').length) {
-            $('#profile-dropdown').hide();
-        }
-    })
-
-    $('.profile-btn').click(function(){
-        $('#profile-dropdown').toggle();
-    });
-
-
-    //side jokes
-
-    $('.terms-and-policies-link').click(function(){
-        alert("Just kidding.... go on :D");
-    });
-
-    $('#forgotten-password').click(function(){
-        alert("That's your problem :P");
-    });
-
-
     //sign in validations
 
     var userNameErr = true;
@@ -330,12 +271,15 @@ $(document).ready( function(){
             },
             success: function(response) {
 
+
                 if( response == 'error' ){
                     $(activeElement).next().html('Sorry something went wrong! Please fill the form again');
                 }
-                else {
+                else if( response == "success" ) {
 
-                    loadUserContent(); // --------------------------- write function that load the logged user experience of the man page
+                    loadLoggedUserContent();
+                    $('.user-message').toggle();
+                    $('.user-message-text').html('You can complete your profile by adding profile pic here at profile.');
 
                 }
             }
@@ -344,7 +288,7 @@ $(document).ready( function(){
     });
 
 
-    $('#submit-log-in').click(function( event){
+    $('#submit-log-in').click(function(event){
 
         event.preventDefault();
 
@@ -356,15 +300,13 @@ $(document).ready( function(){
             },
             success: function(response) {
 
-                alert(response);
-
                 if( response == 'error' ){
                     $('.sign-in-form-error').html('Wrong username or password');
                 }
-                else {
+                else if(response == "success"){
 
-                    loadUserContent(); // --------------------------- write function that load the logged user experience of the man page
-                    
+                    loadLoggedUserContent();
+
                 }
             },
             error: function(jqXHR, textStatus, errorThrown){
@@ -374,8 +316,25 @@ $(document).ready( function(){
 
     });
 
-    
 
+    function loadLoggedUserContent(){
+
+        $('#darker-bg').hide();
+        $('#login-form').hide();
+        $('#sign-in-form').hide();
+
+        $('#user-options').html(
+            '<a href="../profile.php" id="profile-button" class="info-links">' +
+                'Profile' +
+            '</a>' +
+            '<a href="../php/logout.php" class="info-links">' +
+                'Logout' +
+            '</a>'
+        );
+
+        $('.profile-btn').html(' <img src="Pictures/ProfilePictures/default-male-profile-pic.jpg" alt="" class="profile-pic-menu">');
+
+    }
 
 });
 

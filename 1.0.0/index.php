@@ -15,30 +15,30 @@
 
     <link href='https://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">  <!-- Font Awesome -->
-    <script src="http://code.jquery.com/jquery-1.12.0.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.js"></script>
-    <script src="js/jquery-1.9.0.min.js"></script>
+<!--    <script src="js/jquery-1.9.0.min.js"></script>-->
+    <script src="js/main.js"></script>
     <script src="js/LogInSignIn.js"></script>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/forms.css">
     <link rel="shortcut icon" href="Pictures/transparent-logo.ico">
 
     <title>Abnormal Graphics</title>
-
-
 
     <?php
 
         session_start();
 
-        if( isset($_SESSION['logged_user']) == null ){
+        require_once("php/Sessions.php");
 
-            $_SESSION['logged_user'] = false;
-            $_SESSION['username'] = '';
+        if( !isset($_SESSION['logged_user'])) {
+
+            startEmptySession();
+
         }
 
 
     ?>
-
 
 </head>
 <body>
@@ -73,7 +73,7 @@
                 if( $_SESSION['logged_user']  == true ){
 
                     ?>
-                        <img src="Pictures/ProfilePictures/default-male-profile-pic.jpg.jpg" alt="" class="profile-pic-menu">
+                        <img src="Pictures/ProfilePictures/<?php echo $_SESSION['profilePicId'];?>" alt="" class="profile-pic-menu">
                     <?php
 
                 }
@@ -84,6 +84,7 @@
                     <?php
                 }
                 ?>
+
 
             </div>
 
@@ -103,14 +104,40 @@
 
                 <div class="separator"></div>
 
+                <div id="user-options">
+                    <?php
 
-                <div id="sign-in-button" class="info-links">
-                    Sign in
-                </div>
-                <div id="login-button" class="info-links">
-                    Log in
+                    if( $_SESSION['logged_user'] == true ) {
+                        ?>
+                            <a href="profile.php" id="profile-button" class="info-links">
+                                Profile
+                            </a>
+                            <a href="php/logout.php" id="logout-button" class="info-links">
+                                Logout
+                            </a>
+                        <?php
+                    }
+                    else
+                    {
+                        ?>
+                            <div id="sign-in-button" class="info-links">
+                                Sign in
+                            </div>
+                            <div id="login-button" class="info-links">
+                                Log in
+                            </div>
+                        <?php
+                    }
+
+                    ?>
+
                 </div>
 
+            </div>
+
+            <div class="user-message">
+                <img src="Pictures/up-arrow-curr.png" alt="" class="curr-selected">
+                <span class="user-message-text"></span>
             </div>
 
             <div class="search-btn tool-btn">
@@ -126,34 +153,13 @@
 
 <section class="non-select">
 
-    <div id="wrapper">
 
-    </div>
+        <?php
+            print_r($_SESSION);
+        ?>
+
 
 </section>
-
-<!--<footer class="non-select">-->
-<!--    <div class="pull-left">-->
-<!--        <a href="http://www.facebook.com/" target="_blank">-->
-<!--            <img src="picture/transparent-facebook-logo.png" alt="Facebook"  height="30px" width="45px" />-->
-<!--        </a>-->
-<!--        <a href="https://plus.google.com/" target="_blank">-->
-<!--            <img src="picture/transparent-google-logo.png" alt="Google+" height="28px" width="34.5px"/>-->
-<!--        </a>-->
-<!--        <a href="https://twitter.com/" target="_blank">-->
-<!--            <img src="picture/transparent-twitter-logo.png" alt="Twitter" height="28px" width="34.5px"/>-->
-<!--        </a>-->
-<!--        <a href="https://www.youtube.com/" target="_blank">-->
-<!--            <img src="picture/transparent-youtube-logo.png" alt="YouTube" height="30px" width="45px"/>-->
-<!--        </a>-->
-<!--    </div>-->
-<!--    <div class="pull-right">-->
-<!--        <p>-->
-<!--            Copyright © 1998-2015 Abnormal Graphics Inc. <br />-->
-<!--            All trademarks or registered trademarks are property of their respective owners.-->
-<!--        </p>-->
-<!--    </div>-->
-<!--</footer>-->
 
 
 <div id="darker-bg"> </div>
@@ -177,7 +183,7 @@
     </div>
 </form>
 
-<form  id="sign-in-form" enctype="multipart/form-data">
+<form  id="sign-in-form">
 
     <div class="not-current-form form-links log-in-link non-select">Log In</div>
     <div class="current-form form-links sign-in-link non-select">Sign In</div>

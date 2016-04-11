@@ -6,7 +6,6 @@
  * Date: 14.3.2016 г.
  * Time: 8:08
  */
-	session_start();
 
 	class database
     {
@@ -26,6 +25,7 @@
             {
                 $this->config = $config;
             }
+
 
             $this->link = mysqli_connect($this->config['host'],$this->config['user'],$this->config['pass']);
             mysqli_select_db( $this->link, $this->config['database']);
