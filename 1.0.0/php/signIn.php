@@ -74,7 +74,7 @@
 
         $id = $db->saveArray("users", $user);
 
-        startSession($user['username'] , $user['email'] ,$user['firstName'] , $user['lastName'] , $user['gender'] , $user['birthdate'] , $user['joindate'] , $user['profilePicId'] );
+        startSession( $id ,$user['username'] , $user['email'] ,$user['firstName'] , $user['lastName'] , $user['gender'] , $user['birthdate'] , $user['joindate'] , $user['profilePicId'] );
 
         echo "success";
         exit;

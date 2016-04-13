@@ -8,5 +8,6 @@
 
 
     require_once('Sessions.php');
+    session_start();
     startEmptySession();
     header("Location: ../index.php");

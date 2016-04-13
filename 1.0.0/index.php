@@ -20,7 +20,6 @@
     <script src="js/main.js"></script>
     <script src="js/LogInSignIn.js"></script>
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/forms.css">
     <link rel="shortcut icon" href="Pictures/transparent-logo.ico">
 
     <title>Abnormal Graphics</title>
@@ -29,6 +28,7 @@
 
         session_start();
 
+
         require_once("php/Sessions.php");
 
         if( !isset($_SESSION['logged_user'])) {
@@ -36,6 +36,7 @@
             startEmptySession();
 
         }
+
 
 
     ?>
@@ -164,53 +165,53 @@
 
 <div id="darker-bg"> </div>
 
-<form method="post" id="login-form">
+<form method="post" id="login-form" class="sign-in-login-form">
 
     <div class="current-form form-links log-in-link non-select">Log In </div>
     <div class="not-current-form form-links sign-in-link non-select">Sign In </div>
 
     <div class="container">
         <div class="input">
-            <input type="text" name="username" id="login_username" placeholder="Username">
+            <input type="text" name="username" id="login_username" placeholder="Username" class="sign-in-login-input">
         </div>
         <div class="input">
-            <input type="password" name="password" id="login_password" placeholder="Password">
+            <input type="password" name="password" id="login_password" placeholder="Password" class="sign-in-login-input">
         </div>
 
-        <input type="submit" value="Log In" id="submit-log-in" class="submit">
+        <input type="submit" value="Log In" id="submit-log-in" class="submit sign-in-login-input">
         <p class="form-comments" id="forgotten-password">Forgot password?</p>
         <div class="sign-in-form-error"></div>
     </div>
 </form>
 
-<form  id="sign-in-form">
+<form  id="sign-in-form" class="sign-in-login-form">
 
     <div class="not-current-form form-links log-in-link non-select">Log In</div>
     <div class="current-form form-links sign-in-link non-select">Sign In</div>
 
     <div class="container">
         <div class="input">
-            <input type="text" name="username" id="sign-in-username" placeholder="Username">
+            <input type="text" name="username" id="sign-in-username" placeholder="Username" class="sign-in-login-input">
             <div class="validation_check"></div>
         </div>
         <div class="input">
-            <input type="password" name="password" id="sign-in-password" placeholder="Password">
+            <input type="password" name="password" id="sign-in-password" placeholder="Password" class="sign-in-login-input">
             <div class="validation_check"></div>
         </div>
         <div class="input">
-            <input type="password" name="repeat_password" id="repeat_password" placeholder="Repeat password">
+            <input type="password" name="repeat_password" id="repeat_password" placeholder="Repeat password" class="sign-in-login-input">
             <div class="validation_check"></div>
         </div>
         <div class="input">
-            <input type="email" name="email" id="email" placeholder="e-mail">
+            <input type="email" name="email" id="email" placeholder="e-mail" class="sign-in-login-input">
             <div class="validation_check"></div>
         </div>
         <div class="input">
-            <input type="text" name="firstName" id="firstName" placeholder="First name">
+            <input type="text" name="firstName" id="firstName" placeholder="First name" class="sign-in-login-input">
             <div class="validation_check"></div>
         </div>
         <div class="input">
-            <input type="text" name="lastName" id="lastName" placeholder="Last name">
+            <input type="text" name="lastName" id="lastName" placeholder="Last name" class="sign-in-login-input">
             <div class="validation_check"></div>
         </div>
 
@@ -265,7 +266,7 @@
 <!--        </div>-->
 
         <span class="form-comments"> By clicking up "Sign up" you agree to our <span class="terms-and-policies-link">Terms and Policies</span> </span>
-        <input type="submit" value="Sign up" id="submit-sign-in" class="submit">
+        <input type="submit" value="Sign up" id="submit-sign-in" class="submit sign-in-login-input"">
         <div class="sign-in-form-error"></div>
 
     </div>

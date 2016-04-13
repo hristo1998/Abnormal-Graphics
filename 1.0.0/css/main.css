@@ -132,7 +132,7 @@ nav {
 }
 
 .toolbox-icon {
-    margin: 30% 25% 15% 25%;
+    margin: 0.81vw 0.8vw 0.6vw;
 }
 
 .toolbox-icon:hover {
@@ -143,7 +143,7 @@ nav {
     height: 2vw;
     width: 2.1vw;
     border-radius: 60%;
-    margin: 22% 16% 0 ;
+    margin: 0.6vw 0.5vw 0;
 }
 
 
@@ -231,7 +231,7 @@ section {
 }
 
 .profile-wrapper {
-    padding: 8vw 10% 10vw;
+    padding: 5vw 10% 10vw;
     width: 80%;
     float: left;
 }
@@ -264,56 +264,55 @@ section {
 .profile-info-col {
     width: 60%;
     float: left;
+    padding-left: 2vw;
+}
+
+.profile-info-wrapper {
+    margin-bottom: 1.5vw;
 }
 
 .profile-info-row {
     width: 100%;
-    padding-left: 2vw;
-    padding-top: 1.5vw;
+    margin-top: 1.1vw;
     font-size: 1vw;
     color: rgba(216, 216, 216, 0.7);
+    font-family: sans-serif;
 }
 
-
-.profile-username-text {
-    font-size: 5vw;
-    display: inline;
+.profile-username {
+    font-size: 4vw;
+    margin-top: 0.5vw;
 }
 
-.profile-info-small-text {
+.profile-info-join-date {
     width: 100%;
-    padding-left: 2vw;
-    padding-top: 1vw;
-    font-size: 0.7vw;
+    margin-top: 0.5vw;
+    font-size: 0.6vw;
+    color: rgba(0, 0, 0, 1);
 }
 
         /* Edit buttons */
+
+.profile-black-btn {
+    display: inline-block;
+    line-height: 1.5vw;
+    text-align: center;
+    width: 5vw;
+    cursor: pointer;
+    background-color: black;
+    border-radius: 0.3vw;
+    color: rgba(216, 216, 216, 0.7);
+    font-size: 0.9vw;
+}
+
+.profile-black-btn:hover {
+    background-color: #444444;
+}
 
 .profile-pic-edit-btn {
     position: absolute;
     right: 5%;
     bottom: 5%;
-}
-
-.profile-info-col-edit-btn-enable {
-    padding-top: 0.4vw;
-    width: 5vw;
-    height: 1.4vw;
-    background-color: black;
-    border-radius: 0.2vw;
-    text-align: center;
-    cursor: pointer;
-    font-size: 1vw;
-    margin-left: 2vw;
-    margin-top: 0.4vw;
-    color: rgba(216, 216, 216, 0.7);
-}
-
-.profile-info-col-edit-btn-enable:hover {
-    background-color: #4a4a4a;
-}
-.profile-edit-btn {
-    display: inline;
     padding: 0.3vw 0.4vw;
     background-color: rgba(121, 121, 121, 0.55);
     color: rgba(216, 216, 216, 0.7);
@@ -323,20 +322,18 @@ section {
     font-size: 1vw;
 }
 
-.profile-edit-btn:hover {
+.profile-pic-edit-btn:hover {
     background-color: rgba(77, 77, 77, 0.74);
 }
 
-.profile-edit-info-btn {
-    margin-left: 2vw;
-    font-size: 0.8vw;
-    padding-bottom: 0.2vw;
-}
-
 .profile-stop-editing-btn, .profile-save-editing-btn {
+    color: rgba(216, 216, 216, 0.7);
+    padding-left: 2vw;
+    padding-top: 1vw;
+    font-size: 0.7vw;
     text-decoration: underline;
     cursor: pointer;
-    display: inline;
+    display: inline-block;
     margin-left: 0.5vw;
 }
 
@@ -344,15 +341,137 @@ section {
     text-decoration: none;
 }
 
+.profile-edit-save-pic {
+    width: 6vw;
+    position: relative;
+}
+
+.profile-info-pic-err {
+    position: absolute;
+    left: 110%;
+    top: 0;
+    color: darkred;
+    width: intrinsic;           /* Safari/WebKit uses a non-standard name */
+    width: -moz-max-content;    /* Firefox/Gecko */
+    width: -webkit-max-content; /* Chrome */
+}
+
+
+
  /*file uploading form*/
 
+.profile-edit-form-container {
+    margin-top: 2vw;
+    width: 100%;
+    float: left;
+
+}
+
 .profile-edit-upload-form{
-    width: 0;
-    height: 0;
-    border: none;
+
+}
+
+.black-separator {
+    width: 95%;
+    margin: 0.5vw auto;
+    border-bottom: rgba(0, 0, 0, 0.8) 0.15vw solid;
+}
+
+.profile-form-section {
     overflow: hidden;
 }
 
+.profile-form-user-container {
+    width: 40%;
+    padding-left: 10%;
+    float:left;
+}
+
+.profile-form-section-desc {
+    font-size: 1vw;
+    width: 90%;
+    margin-top: 0.7vw;
+    margin-left: 5%;
+    color: rgba(216, 216, 216, 0.7);
+    font-family: sans-serif;
+}
+
+.profile-form-input-container {
+    display: block ;
+    width: 90%;
+    padding-left: 10%;
+    position: relative;
+}
+
+.profile-input-err-msg {
+    position: absolute;
+    left: 67%;
+    font-size: 0.8vw;
+    color: darkred;
+    top: 0;
+}
+
+.profile-form-input-validation_msg {
+    position: absolute;
+    top: 0.5vw;
+    width: intrinsic;           /* Safari/WebKit uses a non-standard name */
+    width: -moz-max-content;    /* Firefox/Gecko */
+    width: -webkit-max-content; /* Chrome */
+}
+
+.profile-form-input-validation_icon{
+    position: absolute;
+    top: -0.1vw;
+    width:1.8vw;
+}
+.profile-form-input {
+    display: block;
+    width: 15vw;
+    margin: 1vw 0;
+    background-color: rgba(151, 151, 151, 0.75);
+    border: black solid 0.1vw;
+    border-radius: 0.3vw;
+    font-size: 0.9vw;
+    line-height: 1.5vw;
+    padding: 0 1vw 0.1vw;
+}
+
+.profile-form-controls-container {
+    float: left;
+    display: block;
+    width:40%;
+    margin-left: 5%;
+    padding: 2vw 1vw ;
+    text-align: center;
+}
+
+.profile-save-btn {
+    display: inline-block;
+    font-size: 0.9vw;
+    line-height: 1.5vw;
+    padding: 0 1vw;
+    color: rgba(216, 216, 216, 0.7);
+    background-color: #363738;
+    border-radius: 0.2vw;
+    margin: 0 1vw;
+    cursor: not-allowed;
+}
+
+.profile-form-section-note {
+    font-size: 0.5vw;
+    color: rgba(216, 216, 216, 0.7);
+    width: 18vw;
+    margin: 0 0 0.1vw 10%;
+}
+
+#profile-form-upload-pic, #profile-form-submit {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
 
 
 
@@ -370,7 +489,7 @@ section {
     display: none;
 }
 
-form {
+.sign-in-login-form {
     position: absolute;
     border-radius: 0.25em;
     text-align: center;
@@ -541,7 +660,6 @@ form {
     font-size: 0.8vw;
     color: red;
 }
-
 
 
 

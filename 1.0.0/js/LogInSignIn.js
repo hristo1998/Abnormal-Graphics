@@ -26,7 +26,7 @@ $(document).ready( function(){
         else
         {
             $.ajax({
-                url: "/php/UserSideSignInValidations.php",
+                url: "/php/usernameValidation.php",
                 type: "POST",
                 data: { username: activeElement.val()},
                 success: function(response) {
@@ -280,6 +280,7 @@ $(document).ready( function(){
                     loadLoggedUserContent();
                     $('.user-message').toggle();
                     $('.user-message-text').html('You can complete your profile by adding profile pic here at profile.');
+                    $('.profile-btn').html(' <img src="Pictures/ProfilePictures/default-male-profile-pic.jpg" alt="" class="profile-pic-menu">');
 
                 }
             }
@@ -303,8 +304,9 @@ $(document).ready( function(){
                 if( response == 'error' ){
                     $('.sign-in-form-error').html('Wrong username or password');
                 }
-                else if(response == "success"){
+                else {
 
+                    $('.profile-btn').html('<img src="Pictures/ProfilePictures/'+response+'" alt="" class="profile-pic-menu">')
                     loadLoggedUserContent();
 
                 }
@@ -332,7 +334,7 @@ $(document).ready( function(){
             '</a>'
         );
 
-        $('.profile-btn').html(' <img src="Pictures/ProfilePictures/default-male-profile-pic.jpg" alt="" class="profile-pic-menu">');
+
 
     }
 

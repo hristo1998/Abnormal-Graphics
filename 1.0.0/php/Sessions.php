@@ -13,7 +13,8 @@
 
     function startEmptySession(){
 
-        session_start();
+//        session_start();
+        $_SESSION['id'] = "";
         $_SESSION['logged_user'] = false;
         $_SESSION['username'] = "";
         $_SESSION['email'] = "";
@@ -26,9 +27,10 @@
 
     }
 
-    function startSession($username , $email , $firstName , $lastName , $gender , $birthdate , $joindate , $profilePicId){
+    function startSession($id ,$username , $email , $firstName , $lastName , $gender , $birthdate , $joindate , $profilePicId){
 
         session_start();
+        $_SESSION['id'] = $id;
         $_SESSION['logged_user'] = true;
         $_SESSION['username'] = $username;
         $_SESSION['email'] = $email;
@@ -39,6 +41,14 @@
         $_SESSION['joindate'] = $joindate;
         $_SESSION['profilePicId'] = $profilePicId;
 
+    }
+
+    function changeProfilePicInSession($profilePicId){
+        $_SESSION['profilePicId'] = $profilePicId;
+    }
+
+    function changeProfileUsernameSession($username) {
+        $_SESSION['username'] = $username;
     }
 
 
