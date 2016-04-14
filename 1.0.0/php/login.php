@@ -14,7 +14,6 @@
   foreach($user as $key=>$val)
   {
     $user[$key] = trim($user[$key]);
-    $user[$key] = stripslashes($user[$key]);
     $user[$key] = mysqli_real_escape_string($db->link, $user[$key]);
   }
 

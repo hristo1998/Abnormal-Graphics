@@ -51,4 +51,8 @@
         $_SESSION['username'] = $username;
     }
 
+    function changeProfileEmailSession($email){
+        $_SESSION['email'] = $email;
+    }
+
 

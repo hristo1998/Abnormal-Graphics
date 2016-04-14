@@ -131,7 +131,7 @@
                     echo $_SESSION['firstname']." ".$_SESSION['lastname'];
                     ?>
                 </div>
-                <div class="profile-info-row">
+                <div class="profile-info-row" id="profile-info-email-field">
                     email:
                     <?php
                     echo $_SESSION['email'];
@@ -244,7 +244,8 @@
                         </div>
 
                         <div class="profile-form-input-container">
-                            <input type="email" name="email" class="profile-form-input" placeholder="Enter your current email">
+                            <input type="email" name="email" class="profile-form-input" placeholder="Enter your current email" id="profile-form-email-change-filed">
+                            <div class="profile-input-err-msg"></div>
                         </div>
 
                         <div class="profile-form-section-note">
@@ -253,7 +254,7 @@
                     </div>
 
                     <div class="profile-form-controls-container">
-                        <div class="profile-save-btn" >
+                        <div class="profile-save-btn" id="profile-form-change-email">
                             Change
                         </div>
                     </div>
@@ -271,7 +272,8 @@
                         </div>
 
                         <div class="profile-form-input-container">
-                            <input type="text" name="name" class="profile-form-input" placeholder="Enter your name here">
+                            <input type="text" name="name" class="profile-form-input" placeholder="Enter your name here" id="profile-form-name-change-filed">
+                            <div class="profile-input-err-msg"></div>
                         </div>
 
                         <div class="profile-form-section-note">
@@ -281,7 +283,7 @@
                     </div>
 
                     <div class="profile-form-controls-container">
-                        <div class="profile-save-btn" >
+                        <div class="profile-save-btn" id="profile-form-change-name">
                             Change
                         </div>
                     </div>

@@ -24,6 +24,8 @@ $(document).ready(function(){
             $('.profile-edit-options').hide();
             $('#profile-info-edit-enable-btn').show();
             $('.profile-edit-save-pic').hide();
+            $('.profile-form-input').val('');
+            $('.profile-input-err-msg').html('');
         });
         $('.profile-profilePic-img img').attr('src' , $('.profile-pic-menu').attr('src'));
     }
@@ -193,21 +195,17 @@ $(document).ready(function(){
         if (activeElement.val().length == 0)
         {
             activeElement.next().html('<p class="profile-form-input-validation_msg">Must fill!</p>');
-            disableButton('#profile-form-change-password');
         }
         else if( !re.test(activeElement.val()) )
         {
             activeElement.next().html(' <p class="profile-form-input-validation_msg">Invalid characters!</p>');
-            disableButton('#profile-form-change-password');
         }
         else if (activeElement.val().length < 5) {
             activeElement.next().html('<p class="profile-form-input-validation_msg">Too short!</p>');
-            disableButton('#profile-form-change-password');
         }
         else if(activeElement.val().length > 21)
         {
             activeElement.next().html('<p class="profile-form-input-validation_msg">Too long!</p>');
-            disableButton('#profile-form-change-password');
         }
         else {
 
@@ -237,9 +235,10 @@ $(document).ready(function(){
             }
             else {
                 activeElement.next().html('<p class="profile-form-input-validation_msg">Low!</p>');
-                disableButton('#profile-form-change-password');
             }
         }
+
+            enableDisablePassChange ();
 
     });
 
@@ -252,14 +251,12 @@ $(document).ready(function(){
         if(activeElement.val().length == 0)
         {
             activeElement.next().html('<p class="profile-form-input-validation_msg">Must fill!</p>');
-            disableButton('#profile-form-change-password');
         }
         else
         {
             if(passErr == true )
             {
                 activeElement.next().html(' <img src="../Pictures/no.png" alt="" class="profile-form-input-validation_icon">');
-                disableButton('#profile-form-change-password');
             }
             else if( activeElement.val() == newEneteredPassword )
             {
@@ -269,21 +266,179 @@ $(document).ready(function(){
             else
             {
                 activeElement.next().html('  <img src="../Pictures/no.png" alt="" class="profile-form-input-validation_icon">');
-                disableButton('#profile-form-change-password');
+            }
+        }
+
+        enableDisablePassChange ();
+
+    });
+
+    function enableDisablePassChange () {
+
+        if( passErr == false && rePassErr == false ) {
+            enableButton('#profile-form-change-password');
+        }
+        else
+        {
+            disableButton('#profile-form-change-password')
+        }
+
+    }
+
+    $('#profile-form-change-password').click(function() {
+
+        if( passErr == false && rePassErr ==false ){
+
+            var pass = $('#profile-form-enter-password').val();
+
+            if( pass == '' ){
+                $('#profile-form-enter-password').next().html('<p class="profile-form-input-validation_msg">Enter your password before tying to change it!</p>')
+            }
+            else
+            {
+                $.ajax({
+                    url: "/php/passwordChange.php",
+                    type: "POST",
+                    data: { password: pass,
+                            newPassword : newEneteredPassword },
+                    success: function(response) {
+
+                        if(response == "wrongPass"){
+                            $('#profile-form-enter-password').next().html('<p class="profile-form-input-validation_msg">Wrong password!</p>');
+                        }
+                        else if(response == "samePass"){
+                            $('#profile-form-enter-password').next().html('<p class="profile-form-input-validation_msg">Your new password can\'t be the same!</p>');
+                        }
+                        else if (response == "success") {
+                            closeOptions();
+                        }
+                        else
+                        {
+
+                            alert(response);
+                        }
+
+                    }
+                });
+            }
+
+        }
+
+        $('#profile-form-enter-password').on("keyup" , function() {
+            $(this).next().html('');                                             // clears enter password msg box after a change
+        });
+
+
+
+    });
+
+    //change name
+
+    var emailErr = true;
+
+    $('#profile-form-email-change-filed').on("keyup" , function() {
+
+        activeElement = $(this);
+        var re = /\S+@\S+\.\S+/;
+        emailErr = true;
+        disableButton('#profile-form-change-email');
+
+        if(activeElement.val() == 0)
+        {
+            activeElement.next().html('<p class="profile-form-input-validation_msg">Must fill!</p>');
+        }
+        else if( re.test(activeElement.val()) )
+        {
+            activeElement.next().html(' <img src="../Pictures/tick.png" alt="" class="profile-form-input-validation_icon">');
+            emailErr = false;
+            enableButton('#profile-form-change-email');
+        }
+        else
+        {
+            activeElement.next().html(' <img src="../Pictures/no.png" alt="" class="profile-form-input-validation_icon">');
+        }
+
+    });
+
+    $('#profile-form-change-email').click(function() {
+
+
+        if(emailErr == false)
+        {
+
+            alert('yes');
+
+            var email = $('#profile-form-email-change-filed').val();
+
+            $.ajax({
+                url: "/php/emailChange.php",
+                type: "POST",
+                data: { email: email },
+                success: function(response) {
+
+                    if(response == "sameEmail")
+                    {
+                        $('#profile-form-change-email').next().html('<p class="profile-form-input-validation_msg">Your new email can\'t be the sanme!</p>');
+                    }
+                    else
+                    {
+                        closeOptions();
+                        $('#profile-info-email-field').html("Email: " + email);
+
+                    }
+
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert(textStatus + " " + errorThrown);
+                }
+
+            });
+            
+        }
+
+    });
+
+
+    //name change
+
+    var nameErr = true;
+
+    $('#profile-form-name-change-filed').on("keyup" , function() {
+
+        activeElement = $(this);
+
+        disableButton('#profile-form-change-name');
+
+        var re = /^\w+\s\w+$/;
+        if(activeElement.val() == 0)
+        {
+            activeElement.next().html('<p class="profile-form-input-validation_msg">Must fill!</p>');
+        }
+        else if(activeElement.val().length < 5)
+        {
+            activeElement.next().html('<p class="profile-form-input-validation_msg">Too short!</p>');
+        }
+        else if(activeElement.val().length > 21)
+        {
+            activeElement.next().html('<p class="profile-form-input-validation_msg">Too long!</p>');
+        }
+        else
+        {
+            if(re.test(activeElement.val()))
+            {
+                activeElement.next().html(' <img src="../Pictures/tick.png" alt="" class="profile-form-input-validation_icon">');
+                nameErr = false;
+                enableButton('#profile-form-change-name');
+            }
+            else
+            {
+                activeElement.next().html(' <p class="profile-form-input-validation_msg">Invalid characters!</p>');
+
             }
         }
 
     });
 
-    $('#profile-form-change-password').hover(function() {
-
-
-
-        if( passErr == false && rePassErr == false ) {
-            enableButton($(this));
-        }
-
-    });
 
 
 
@@ -311,5 +466,5 @@ $(document).ready(function(){
             $(btnID).css("background-color" , "#363738" )
         });
     }
-    
+
 });
