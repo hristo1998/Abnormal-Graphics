@@ -55,4 +55,24 @@
         $_SESSION['email'] = $email;
     }
 
+    function changeProfileFirstNameSession($firstname){
+        $_SESSION['firstname'] = $firstname;
+    }
+
+    function changeProfileLastNameSession($lastname) {
+        $_SESSION['lastname'] =$lastname;
+    }
+
+    function changeProfileGenderSession($gender) {
+        $_SESSION['gender'] = $gender;
+    }
+
+    function changeProfileBirthDateSessoin($birthdate){
+        $_SESSION['birthdate'] = $birthdate;
+    }
+
+    function changeProfilePicSession($profilePicId){
+        $_SESSION['profilePicId'] = $profilePicId;
+    }
+
 

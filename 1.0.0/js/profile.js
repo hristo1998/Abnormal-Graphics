@@ -26,6 +26,10 @@ $(document).ready(function(){
             $('.profile-edit-save-pic').hide();
             $('.profile-form-input').val('');
             $('.profile-input-err-msg').html('');
+            $('#profile-form-gender option:first-child').prop('selected',true);
+            $('#profile-form-birthday option:first-child').prop('selected',true);
+            $('#profile-form-birthmonth option:first-child').prop('selected',true);
+            $('#profile-form-birthyear option:first-child').prop('selected',true);
         });
         $('.profile-profilePic-img img').attr('src' , $('.profile-pic-menu').attr('src'));
     }
@@ -437,6 +441,94 @@ $(document).ready(function(){
             }
         }
 
+    });
+
+    $('#profile-form-change-name').click(function() {
+
+        if( nameErr == false ){
+
+            var name = $('#profile-form-name-change-filed').val().split(' ');
+
+            $.ajax({
+                url: "/php/nameChange.php",
+                type: "POST",
+                data: { name: name },
+                success: function(response) {
+
+                    if(response == "success")
+                    {
+                        closeOptions();
+                        $('#profile-info-name-field').html(name[0] + " " + name[1]);
+                    }
+                    else
+                    {
+
+                    }
+
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert(textStatus + " " + errorThrown);
+                }
+
+            });
+
+        }
+
+    });
+
+    // gender and birthdate change
+
+    var changeBdaySexBtn = true;
+
+    $('#profile-form-gender, #profile-form-birthday , #profile-form-birthmonth , #profile-form-birthyear').change(function() {
+        enableButton('#profile-form-change-birthdate-gender');
+        changeBdaySexBtn = false;
+    });
+
+    $('#profile-form-change-birthdate-gender').click(function() {
+        if(changeBdaySexBtn == false){
+
+            var gender = $('#profile-form-gender').val();
+            var birthday = $('#profile-form-birthday').val();
+            var birthmonth = $('#profile-form-birthmonth').val();
+            var birthyear = $('#profile-form-birthyear').val();
+
+            $.ajax({
+                url: "/php/birthdateGenderChange.php",
+                type: "POST",
+                data: { gender: gender,
+                        birthday: birthday,
+                        birthmonth: birthmonth,
+                        birthyear: birthyear },
+                success: function(response) {
+
+                    if (response == "error") {
+                        $('.profile-form-select-container').next().html('<p class="profile-form-input-validation_msg">Sorry something went wrong.Try again!</p>');
+                    }
+                    else
+                    {
+                        var instructions = response.split(":");
+
+                        if(instructions[0]==1)
+                        {
+                            $('#profile-info-birthdate-field').html("Birthdate: "+instructions[1]);
+                        }
+
+                        if(instructions[2]==1)
+                        {
+                            $('.profile-pic-menu').attr("src","Pictures/ProfilePictures/"+instructions[3]);
+                            $('.profile-profilePic-img img').attr("src","Pictures/ProfilePictures/"+instructions[3]);
+                        }
+                        closeOptions();
+                    }
+
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert(textStatus + " " + errorThrown);
+                }
+
+            });
+        }
     });
 
 

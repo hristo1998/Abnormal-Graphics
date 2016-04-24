@@ -278,9 +278,9 @@ $(document).ready( function(){
                 else if( response == "success" ) {
 
                     loadLoggedUserContent();
-                    $('.user-message').toggle();
+                    $('.user-message').show();
                     $('.user-message-text').html('You can complete your profile by adding profile pic here at profile.');
-                    $('.profile-btn').html(' <img src="Pictures/ProfilePictures/default-male-profile-pic.jpg" alt="" class="profile-pic-menu">');
+                    $('.profile-btn-icon').html(' <img src="Pictures/ProfilePictures/default-male-profile-pic.jpg" alt="" class="profile-pic-menu">');
 
                 }
             }
@@ -302,11 +302,11 @@ $(document).ready( function(){
             success: function(response) {
 
                 if( response == 'error' ){
-                    $('.sign-in-form-error').html('Wrong username or password');
+                    $('.log-in-form-error').html('Wrong username or password');
                 }
                 else {
 
-                    $('.profile-btn').html('<img src="Pictures/ProfilePictures/'+response+'" alt="" class="profile-pic-menu">')
+                    $('.profile-btn-icon').html('<img src="Pictures/ProfilePictures/'+response+'" alt="" class="profile-pic-menu">')
                     loadLoggedUserContent();
 
                 }

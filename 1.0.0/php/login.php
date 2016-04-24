@@ -22,12 +22,14 @@ $result = $db->fetchArray($query);
 
 
   if( count($result)>0){
+
       if( $result[0]['password'] == md5($user['password']) ){
 
         startSession( $result[0]['id'] , $result[0]['username'] , $result[0]['email'] ,$result[0]['firstname'] , $result[0]['lastname'] , $result[0]['gender'] , $result[0]['birthdate'] , $result[0]['joindate'] , $result[0]['profilePicId'] );
         echo $result[0]['profilePicId'];
         exit;
       }
+
   }
 
     echo "error";

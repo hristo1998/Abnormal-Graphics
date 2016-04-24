@@ -19,6 +19,7 @@
 <!--    <script src="js/jquery-1.9.0.min.js"></script>-->
     <script src="js/main.js"></script>
     <script src="js/LogInSignIn.js"></script>
+    <script src="js/searchField.js"></script>
     <link rel="stylesheet" href="css/main.css">
     <link rel="shortcut icon" href="Pictures/transparent-logo.ico">
 
@@ -70,80 +71,114 @@
 
             <div class="profile-btn tool-btn">
 
-                <?php
-                if( $_SESSION['logged_user']  == true ){
+               <div class="profile-btn-icon">
+                   <?php
+                   if( $_SESSION['logged_user']  == true ){
 
-                    ?>
-                        <img src="Pictures/ProfilePictures/<?php echo $_SESSION['profilePicId'];?>" alt="" class="profile-pic-menu">
-                    <?php
+                       ?>
+                       <img src="Pictures/ProfilePictures/<?php echo $_SESSION['profilePicId'];?>" alt="" class="profile-pic-menu">
+                       <div id="hidden-username-container"><?php echo $_SESSION['username'];?></div>
+                       <?php
 
-                }
-                else
-                {
-                    ?>
-                        <i class="fa fa-chevron-down toolbox-icon"></i>
-                    <?php
-                }
-                ?>
+                   }
+                   else
+                   {
+                       ?>
+                       <i class="fa fa-chevron-down toolbox-icon"></i>
+                       <?php
+                   }
+                   ?>
+
+               </div>
 
 
-            </div>
 
-            <div id="profile-dropdown">
+                <div id="profile-dropdown">
 
-                <img src="Pictures/up-arrow-curr.png" alt="" class="curr-selected">
+                    <img src="Pictures/up-arrow-curr.png" alt="" class="curr-selected">
 
-                <a href="" class="info-links">
-                    Contact us
-                </a>
-                <a href="" class="info-links">
-                    About us
-                </a>
-                <a href="" class="info-links">
-                    Terms and polices
-                </a>
+                    <a href="" class="info-links">
+                        Contact us
+                    </a>
+                    <a href="" class="info-links">
+                        About us
+                    </a>
+                    <a href="" class="info-links">
+                        Terms and polices
+                    </a>
 
-                <div class="separator"></div>
+                    <div class="separator"></div>
 
-                <div id="user-options">
-                    <?php
+                    <div id="user-options">
+                        <?php
 
-                    if( $_SESSION['logged_user'] == true ) {
-                        ?>
-                            <a href="profile.php" id="profile-button" class="info-links">
+                        if( $_SESSION['logged_user'] == true ) {
+                            ?>
+                            <span id="profile-button" class="info-links">
                                 Profile
-                            </a>
+                            </span>
                             <a href="php/logout.php" id="logout-button" class="info-links">
                                 Logout
                             </a>
-                        <?php
-                    }
-                    else
-                    {
-                        ?>
+                            <?php
+                        }
+                        else
+                        {
+                            ?>
                             <div id="sign-in-button" class="info-links">
                                 Sign in
                             </div>
                             <div id="login-button" class="info-links">
                                 Log in
                             </div>
-                        <?php
-                    }
+                            <?php
+                        }
 
-                    ?>
+                        ?>
+
+                        <form action="profile.php" id="profile-link" method="post">
+                            <input type="hidden" name="username" value="" id="profile-link-username">
+                        </form>
+
+                    </div>
 
                 </div>
 
-            </div>
+                <div class="user-message">
+                    <img src="Pictures/up-arrow-curr.png" alt="" class="curr-selected">
+                    <span class="user-message-text"></span>
+                </div>
 
-            <div class="user-message">
-                <img src="Pictures/up-arrow-curr.png" alt="" class="curr-selected">
-                <span class="user-message-text"></span>
             </div>
 
             <div class="search-btn tool-btn">
                 <i class="fa fa-search toolbox-icon"></i>
             </div>
+
+            <div class="search-field-container">
+                <input type="text" class="search-field" placeholder="Search AGraphics" id="nav-search-field">
+
+                <div class="nav-search-results-container">
+                    <div class="search-result-field-separator">
+                        People
+                    </div>
+                    <div class="nav-search-results-user-profiles" id="nav-search-results-user-profiles">
+
+                    </div>
+                    <div class="search-result-field-separator">
+                        Articles
+                    </div>
+                    <div class="nav-search-results-articles" id="nav-search-results-articles">
+
+                    </div>
+                </div>
+
+                <form action="profile.php" id="nav-search-hidden-submit-form" method="post">
+                    <input type="hidden" name="username" id="nav-hidden-search-field" value="">
+                </form>
+
+            </div>
+
 
 
 
@@ -152,12 +187,14 @@
 </header>
 
 
-<section class="non-select">
+<section class="non-select" id="section" class="section">
 
 
         <?php
             print_r($_SESSION);
         ?>
+    <br/>
+
 
 
 </section>
@@ -180,7 +217,7 @@
 
         <input type="submit" value="Log In" id="submit-log-in" class="submit sign-in-login-input">
         <p class="form-comments" id="forgotten-password">Forgot password?</p>
-        <div class="sign-in-form-error"></div>
+        <div class="log-in-form-error"></div>
     </div>
 </form>
 
@@ -234,7 +271,7 @@
                 ?>
             </select>
             <select class="selectForm" name="user_born_at_month" id="date_month">
-                <option value="">Month</option>
+                <option value="" class="profile-select-default">Month</option>
                 <option value="1">January</option>
                 <option value="2">February</option>
                 <option value="3">March</option>

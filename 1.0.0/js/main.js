@@ -64,5 +64,16 @@ $(document).ready( function() {
         alert("That's your problem :P");
     });
 
+    //profile link
+
+    $('#profile-button').click(function() {
+
+        var loggeduser = $('#hidden-username-container').html();
+
+        $('#profile-link-username').val(loggeduser);
+        $('#profile-link').submit();
+
+    });
+
 
 });

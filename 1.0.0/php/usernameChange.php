@@ -13,7 +13,6 @@
     $error = false;
 
     $username = trim($username);
-    $username = stripslashes($username);
     $username = mysqli_real_escape_string($db->link, $username);
 
     if(!ctype_alnum($username))
